@@ -13,28 +13,31 @@ TextTheme buildTextTheme() {
     // Typically reserved for hero/marketing sections, splash screens,
     // or short one-word statements. Never use for body copy.
 
-    /// 57 sp — Largest display text.
-    /// Use for: splash screen titles, giant counters, hero numbers.
+    /// Display — 32/40, w700 (design token: --type-display).
+    /// Use for: hero headlines (e.g. home "ابدأ رحلتك الصحية").
     displayLarge: TextStyle(
-      fontSize: 57,
-      fontWeight: FontWeight.w400,
-      letterSpacing: -0.25,
+      fontSize: 32,
+      fontWeight: FontWeight.w700,
+      height: 1.25,
+
     ),
 
     /// 45 sp — Mid-size display text.
     /// Use for: prominent feature headlines, onboarding first-screen titles.
     displayMedium: TextStyle(
-      fontSize: 45,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
+      fontSize: 28,
+      fontWeight: FontWeight.w700,
+      height: 1.29,
+
     ),
 
     /// 36 sp — Smallest display text.
     /// Use for: section-level hero text, large marketing callouts.
     displaySmall: TextStyle(
-      fontSize: 36,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
+      fontSize: 24,
+      fontWeight: FontWeight.w700,
+      height: 1.33,
+
     ),
 
     // ── Headline ─────────────────────────────────────────────────────────────
@@ -44,25 +47,28 @@ TextTheme buildTextTheme() {
     /// 32 sp — Large page-level heading.
     /// Use for: main screen titles (e.g. "My Profile"), large dialog headers.
     headlineLarge: TextStyle(
-      fontSize: 32,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
+      fontSize: 28,
+      fontWeight: FontWeight.w700,
+      height: 1.29,
+
     ),
 
     /// 28 sp — Standard page-level heading.
     /// Use for: AppBar titles on content-heavy screens, sheet headers.
     headlineMedium: TextStyle(
-      fontSize: 28,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
+      fontSize: 24,
+      fontWeight: FontWeight.w700,
+      height: 1.33,
+
     ),
 
     /// 24 sp — Compact page-level heading.
     /// Use for: section headings within a scrollable page, card group titles.
     headlineSmall: TextStyle(
-      fontSize: 24,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      height: 1.4,
+
     ),
 
     // ── Title ─────────────────────────────────────────────────────────────────
@@ -73,17 +79,19 @@ TextTheme buildTextTheme() {
     /// Use for: AppBar titles (standard), large list-section headers,
     ///          dialog/modal titles.
     titleLarge: TextStyle(
-      fontSize: 22,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      height: 1.4,
+
     ),
 
     /// 16 sp — Standard component title.
     /// Use for: ListTile titles, card headings, tab labels, dropdown labels.
     titleMedium: TextStyle(
       fontSize: 16,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.15,
+      fontWeight: FontWeight.w600,
+      height: 1.5,
+
     ),
 
     /// 14 sp — Compact component title.
@@ -91,8 +99,9 @@ TextTheme buildTextTheme() {
     ///          subtitle of a section.
     titleSmall: TextStyle(
       fontSize: 14,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.1,
+      fontWeight: FontWeight.w600,
+      height: 1.57,
+
     ),
 
     // ── Body ──────────────────────────────────────────────────────────────────
@@ -103,27 +112,30 @@ TextTheme buildTextTheme() {
     /// Use for: main paragraph text, message bubbles, article content,
     ///          default Text() inside cards.
     bodyLarge: TextStyle(
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.5,
+      height: 1.67,
+
     ),
 
     /// 14 sp — Standard body text (most common).
     /// Use for: secondary descriptions, ListTile subtitles, form helper text,
     ///          dialog body copy. This is the workhorse style.
     bodyMedium: TextStyle(
-      fontSize: 14,
+      fontSize: 16,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.25,
+      height: 1.69,
+
     ),
 
     /// 12 sp — Small body / caption text.
     /// Use for: captions under images, timestamps, metadata, fine print,
     ///          secondary info below a ListTile.
     bodySmall: TextStyle(
-      fontSize: 12,
+      fontSize: 14,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.4,
+      height: 1.64,
+
     ),
 
     // ── Label ─────────────────────────────────────────────────────────────────
@@ -134,27 +146,30 @@ TextTheme buildTextTheme() {
     /// Use for: ElevatedButton / TextButton / OutlinedButton text,
     ///          navigation bar labels (selected), tab bar labels.
     labelLarge: TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.1,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      height: 1.5,
+
     ),
 
     /// 12 sp — Standard control label.
     /// Use for: chip text, badge text, tooltip text, navigation rail labels,
     ///          input counter text, overline headings.
     labelMedium: TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.5,
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+      height: 1.57,
+
     ),
 
     /// 11 sp — Smallest control label.
     /// Use for: dense navigation labels, very small badges, annotation text,
     ///          data table column headers. Avoid for reading-heavy content.
     labelSmall: TextStyle(
-      fontSize: 11,
+      fontSize: 12,
       fontWeight: FontWeight.w500,
-      letterSpacing: 0.5,
+      height: 1.67,
+
     ),
   );
 
