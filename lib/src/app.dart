@@ -6,6 +6,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final current = _buildMaterialApp(context);
+    Text('${context.colors.primary}');
     return current;
   }
 
@@ -15,7 +16,8 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: buildLightTheme(primaryColorHex: '#800020'),
       darkTheme: buildDarkTheme(primaryColorHex: '#800020'),
-      themeMode: ThemeMode.system,
+      // راح نخليه على مود ال light مؤقتا
+      themeMode: ThemeMode.light,
       routerConfig: appRouter,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

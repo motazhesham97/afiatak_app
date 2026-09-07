@@ -100,7 +100,7 @@ ThemeData _buildTheme(ColorScheme colorScheme, AppColorsExtension customColors) 
     ],
     
     // --- Basic Elements ---
-    scaffoldBackgroundColor: colorScheme.surface,
+    scaffoldBackgroundColor: colorScheme.surfaceDim,
     dividerTheme: DividerThemeData(
       color: colorScheme.outlineVariant,
       thickness: 1,
@@ -351,6 +351,26 @@ ThemeData buildLightTheme({required String primaryColorHex}) {
   final colorScheme = ColorScheme.fromSeed(
     seedColor: seed,
     brightness: Brightness.light,
+  ).copyWith(
+    primary: const Color(0xFF800020),
+    onPrimary: const Color(0xFFFFFFFF),
+    primaryContainer: const Color(0xFFF7E9EC),
+    onPrimaryContainer: const Color(0xFF5C0016),
+    surface: const Color(0xFFFFFFFF),
+    onSurface: const Color(0xFF1A1A1A),
+    onSurfaceVariant: const Color(0xFF6E6E6E),
+    outline: const Color(0xFFB5B5B5),
+    outlineVariant: const Color(0xFFE5E5E5),
+    error: const Color(0xFF1F1F1F),
+    onError: const Color(0xFFFFFFFF),
+    errorContainer: const Color(0xFFEFEFEF),
+    onErrorContainer: const Color(0xFF1A1A1A),
+    surfaceContainerLow: const Color(0xFFF7F7F7),
+    surfaceContainer: const Color(0xFFEFEFEF),
+    surfaceContainerHighest: const Color(0xFFD9D9D9),
+    surfaceDim: const Color(0xFFE5E5E5),
+
+
   );
   return _buildTheme(colorScheme, AppPalettes.light);
 }
