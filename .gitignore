@@ -43,6 +43,7 @@ app.*.map.json
 # Environment secrets — never commit real values
 .env
 .env.*
+!.env.example
 
 # Design reference prototype (local material, not part of the Flutter app)
 /design_reference/
