@@ -1,73 +1,39 @@
 import 'package:flutter/material.dart';
 
-/// Predefined box shadows aligned with Material 3 elevation tiers.
-///
-/// Usage:
-/// ```dart
-/// Container(
-///   decoration: BoxDecoration(
-///     boxShadow: AppShadows.card,
-///   ),
-/// )
-/// ```
+/// Box shadows from the Aafiatak design system (Burgundy Monochrome v2.1).
 abstract final class AppShadows {
   AppShadows._();
 
-  /// No shadow — flat, tonal surface (elevation 0).
+  /// No shadow — flat surface.
   static const List<BoxShadow> none = [];
 
-  /// Minimal shadow — barely lifted surfaces (elevation 1).
-  /// Use for: toggle surfaces, filled cards on white background.
-  static const List<BoxShadow> subtle = [
+  /// e1 — resting cards, inputs, icon buttons, list rows.
+  /// CSS: 0 2px 10px rgba(26,26,26,.055)
+  static const List<BoxShadow> e1 = [
     BoxShadow(
-      color: Color(0x0D000000), // 5% black
-      blurRadius: 2,
-      offset: Offset(0, 1),
-    ),
-  ];
-
-  /// Card shadow — clearly elevated content (elevation 2–3).
-  /// Use for: cards, list items that are tappable, floating elements.
-  static const List<BoxShadow> card = [
-    BoxShadow(
-      color: Color(0x14000000), // 8% black
-      blurRadius: 8,
+      color: Color(0x0E1A1A1A),
       offset: Offset(0, 2),
-    ),
-    BoxShadow(
-      color: Color(0x0A000000), // 4% black
-      blurRadius: 2,
-      offset: Offset(0, 1),
+      blurRadius: 10,
     ),
   ];
 
-  /// Elevated shadow — significantly raised surface (elevation 6–8).
-  /// Use for: FABs, dropdown menus, tooltips.
-  static const List<BoxShadow> elevated = [
+  /// e2 — floating/overlay surfaces (bottom actions, popups).
+  /// CSS: 0 14px 34px rgba(26,26,26,.11)
+  static const List<BoxShadow> e2 = [
     BoxShadow(
-      color: Color(0x1F000000), // 12% black
-      blurRadius: 16,
-      offset: Offset(0, 6),
-    ),
-    BoxShadow(
-      color: Color(0x0F000000), // 6% black
-      blurRadius: 4,
-      offset: Offset(0, 2),
+      color: Color(0x1C1A1A1A),
+      offset: Offset(0, 14),
+      blurRadius: 34,
     ),
   ];
 
-  /// Modal shadow — overlay surfaces, dialogs, bottom sheets (elevation 12+).
-  /// Use for: dialogs, modals, side sheets.
-  static const List<BoxShadow> modal = [
+  /// brand — burgundy glow under primary buttons and feature panels.
+  /// CSS: 0 12px 26px rgba(128,0,32,.20)
+  static const List<BoxShadow> brand = [
     BoxShadow(
-      color: Color(0x29000000), // 16% black
-      blurRadius: 32,
+      color: Color(0x33800020),
       offset: Offset(0, 12),
-    ),
-    BoxShadow(
-      color: Color(0x14000000), // 8% black
-      blurRadius: 8,
-      offset: Offset(0, 4),
+      blurRadius: 26,
     ),
   ];
 }

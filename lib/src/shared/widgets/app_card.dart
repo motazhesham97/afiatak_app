@@ -39,7 +39,7 @@ class AppCard extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final VoidCallback? onTap;
 
-  /// When true, uses [AppShadows.card] instead of a border outline.
+  /// When true, uses [AppShadows.e1] instead of a border outline.
   final bool showShadow;
   final Color? color;
 
@@ -111,7 +111,7 @@ class AppCard extends StatelessWidget {
         border: showShadow
             ? null
             : Border.all(color: cs.outlineVariant, width: 1),
-        boxShadow: showShadow ? AppShadows.card : AppShadows.none,
+        boxShadow: showShadow ? AppShadows.e1 : AppShadows.none,
       ),
       clipBehavior: Clip.antiAlias,
       child: onTap != null
