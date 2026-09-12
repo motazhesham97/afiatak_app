@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
-/// Named animation curves following Material 3 motion guidelines.
+/// ═══════════════════════════════════════════════════════════════════════════
+/// منحنيات الحركة — "شخصية" تسارع وتباطؤ الأنيميشن
+/// ═══════════════════════════════════════════════════════════════════════════
 ///
-/// Material 3 defines four core easing families:
-/// - **Standard** — most UI transitions
-/// - **Emphasized** — important / expressive transitions  
-/// - **Decelerate** — elements entering the screen
-/// - **Accelerate** — elements leaving the screen
+/// المدة (AppDurations) تجيب "كم يستغرق؟" — والمنحنى يجيب "كيف يتسارع؟".
+/// نفس المدة بمنحنيين مختلفين تعطي إحساسين مختلفين تمامًا: منحنى الخطي
+/// آلي وممل، والمنحنيات المبطأة (eased) تبدو طبيعية كحركة الأشياء الفيزيائية.
 ///
-/// Usage:
+/// عائلات Material 3 الأساسية الأربع، يقابلها التصميم بقيم cubic-bezier
+/// في tokens.css (--ease-standard / decelerate / accelerate):
+/// - **Standard** — معظم انتقالات الواجهة (دخول وخروج معًا)
+/// - **Emphasized** — الانتقالات المهمة/المعبّرة
+/// - **Decelerate** — للعناصر الداخلة للشاشة (تبدأ سريعة وتنعّم للتوقف)
+/// - **Accelerate** — للعناصر الخارجة من الشاشة (تبدأ بطيئة وتتسارع للخروج)
+///
+/// الاستخدام:
 /// ```dart
 /// AnimatedContainer(
 ///   duration: AppDurations.normal,
@@ -18,52 +25,52 @@ import 'package:flutter/material.dart';
 abstract final class AppCurves {
   AppCurves._();
 
-  // ── Material 3 Core Easing ────────────────────────────────────────────────
+  // ── منحنيات Material 3 الأساسية ──────────────────────────────────────────
 
-  /// Standard easing — for most UI transitions (enter + exit both).
-  /// Equivalent to M3 "Standard" curve.
+  /// القياسي — لمعظم انتقالات الواجهة.
+  /// يقابل --ease-standard: cubic-bezier(.2,0,0,1) في التصميم.
   static const Curve standard = Curves.easeInOut;
 
-  /// Emphasized easing — for important, expressive transitions.
-  /// More dramatic entry, used for large elements or hero moments.
+  /// المعبّر — للانتقالات المهمة والمساحات الكبيرة (hero moments).
   static const Curve emphasized = Curves.easeInOutCubicEmphasized;
 
-  /// Decelerate — for elements entering the screen (fly-in).
-  /// Starts fast, slows down to a gentle stop.
+  /// التباطؤ — للعناصر الداخلة للشاشة (تحليق للداخل): يبدأ سريعًا ويهدأ.
+  /// يقابل --ease-decelerate: cubic-bezier(0,0,.2,1).
   static const Curve decelerate = Curves.decelerate;
 
-  /// Accelerate — for elements leaving the screen (fly-out).
-  /// Starts slow, picks up speed as it exits.
+  /// التسارع — للعناصر الخارجة من الشاشة: يبدأ بطيئًا وينطلق للخروج.
+  /// يقابل --ease-accelerate: cubic-bezier(.3,0,1,.3).
   static const Curve accelerate = Curves.easeIn;
 
-  // ── Additional utility curves ─────────────────────────────────────────────
+  // ── منحنيات مساعدة إضافية ─────────────────────────────────────────────────
 
-  /// Spring-like overshoot — fun, bouncy interactions (FABs, cards).
+  /// نابضي بارتداد — تفاعلات مرحة (FAB، بطاقات) — استخدمه باعتدال.
   static const Curve spring = Curves.elasticOut;
 
-  /// Ease out back — slight overshoot then settle; good for scaling pop-ins.
+  /// خروج بارتداد خفيف — ممتاز للعناصر التي "تطفو" بالتكبير ثم تستقر.
   static const Curve easeOutBack = Curves.easeOutBack;
 
-  /// Linear — only for continuous loops (loaders, shimmer).
+  /// خطي — **فقط** للحلقات المستمرة (مؤشرات تحميل، shimmer) حيث لا
+  /// بداية ولا نهاية محسوسة. لا تستخدمه لانتقالات عادية — يبدو آليًا.
   static const Curve linear = Curves.linear;
 
-  /// Ease in out cubic — smooth, natural-feeling transitions.
+  /// تكعيبي ناعم — انتقالات طبيعية الإحساس للمقاسات المتوسطة.
   static const Curve smooth = Curves.easeInOutCubic;
 
-  // ── Semantic aliases ──────────────────────────────────────────────────────
+  // ── الأسماء الدلالية ──────────────────────────────────────────────────────
 
-  /// For page enter transitions.
+  /// دخول صفحة جديدة — تباطؤ (تصل سريعًا وتستقر بنعومة).
   static const Curve pageEnter = decelerate;
 
-  /// For page exit transitions.
+  /// خروج صفحة — تسارع (تنطلق من عندها للخارج).
   static const Curve pageExit = accelerate;
 
-  /// For popups and dialogs appearing.
+  /// ظهور النوافذ والحواريات — منحنى معبّر يمنحها حضورًا.
   static const Curve popupOpen = emphasized;
 
-  /// For modals and sheets closing.
+  /// إغلاق النوافذ والـ sheets — قياسي هادئ.
   static const Curve popupClose = standard;
 
-  /// For micro-interactions (button press, toggle).
+  /// التفاعلات الدقيقة (ضغط زر، تبديل) — بارتداد خفيف يعطي إحساس "الحياة".
   static const Curve microInteraction = easeOutBack;
 }

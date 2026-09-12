@@ -1,70 +1,90 @@
 import 'package:flutter/material.dart';
 
-/// Reusable border radii and border shapes used across the app.
+/// ═══════════════════════════════════════════════════════════════════════════
+/// أنصاف الأقطار (الاستدارة) — مقابلة مباشرة لتوكنات --radius-* في التصميم
+/// ═══════════════════════════════════════════════════════════════════════════
 ///
-/// Usage:
+/// التطابق مع CSS المرجعي:
+///   radius.sm = 8 → [sm]  |  radius.md = 12 → [md]  |  radius.lg = 16 → [lg]
+///   radius.xl = 24 → [xl] |  radius.full = 999 → [full]
+///
+/// لماذا BorderRadius وليس رقمًا؟ لأن أكثر APIs في Flutter تطلب كائن
+/// [BorderRadius] جاهزًا، فتوفيره هنا يغنيك عن BorderRadius.circular(12)
+/// المكرر في كل ملف.
+///
+/// الاستخدام:
 /// ```dart
-/// Container(decoration: BoxDecoration(borderRadius: AppBorders.md))
+/// Container(decoration: BoxDecoration(borderRadius: AppBorders.card))
+/// shape: RoundedRectangleBorder(borderRadius: AppBorders.button),
 /// ```
 abstract final class AppBorders {
   AppBorders._();
 
-  // ── Border Radii ──────────────────────────────────────────────────────────
+  // ── أنصاف الأقطار الأساسية ────────────────────────────────────────────────
 
-  /// 4 pt — subtle rounding, used for small chips, badges.
+  /// 4 — استدارة دقيقة. (موجودة في النظام لكن التصميم المرجعي لا يستخدمها —
+  /// أبقيناها لاستخدامات محتملة مستقبلًا كحد أدنى للإدخالات الصغيرة).
   static const BorderRadius xs = BorderRadius.all(Radius.circular(4));
 
-  /// 8 pt — standard rounding for buttons, text fields.
+  /// 8 — يقابل radius.sm: عناصر صغيرة مضغوطة (خلايا OTP، عناصر مؤشرات).
   static const BorderRadius sm = BorderRadius.all(Radius.circular(8));
 
-  /// 12 pt — medium rounding for cards, list tiles.
+  /// 12 — يقابل radius.md: **الأزرار وحقول الإدخال** في تصميمنا
+  /// (.button و .input-shell يستخدمان radius-md).
   static const BorderRadius md = BorderRadius.all(Radius.circular(12));
 
-  /// 16 pt — large rounding for modals, bottom sheets.
+  /// 16 — يقابل radius-lg: **البطاقات والصفوف** (.surface, .doctor-card,
+  /// .list-row — كلها radius-lg).
   static const BorderRadius lg = BorderRadius.all(Radius.circular(16));
 
-  /// 24 pt — extra large rounding for dialogs, feature cards.
+  /// 24 — يقابل radius-xl: العناصر البطولية الكبيرة (feature-panel،
+  /// confirmation-hero، profile-hero) والحوارات.
   static const BorderRadius xl = BorderRadius.all(Radius.circular(24));
 
-  /// 28 pt — Material 3 bottom sheet top radius.
+  /// 28 — قمة الـ BottomSheet في Material 3 (قيمة إطار عمل قياسية،
+  /// وليست من توكنات التصميم).
   static const BorderRadius bottomSheet = BorderRadius.vertical(
     top: Radius.circular(28),
   );
 
-  /// Fully circular (pill/stadium shape).
+  /// 999 — الاستدارة الكاملة (حبّة/دوّالة): الشارات badge، الـ chips،
+  /// حاوية أيقونة التاب النشط في شريط التنقل السفلي.
   static const BorderRadius full = BorderRadius.all(Radius.circular(999));
 
-  // ── Semantic aliases ──────────────────────────────────────────────────────
+  // ── الأسماء الدلالية — الصلة بين "ما هو العنصر" و"كم استدارته" ───────────
+  //
+  // ⚠️ تاريخية مهمة: هذه الـ aliases صُححت لتطابق التصميم المرجعي —
+  // كانت معكوسة من FlutterInit (button=16, card=12) وهو عكس CSS!
 
-  /// Default button border radius.
+  /// استدارة الزر — 12 (radius-md، يطابق .button في CSS).
   static const BorderRadius button = md;
 
-  /// Default card border radius.
+  /// استدارة البطاقة — 16 (radius-lg، يطابق .surface في CSS).
   static const BorderRadius card = lg;
 
-  /// Default input field border radius.
+  /// استدارة حقل الإدخال — 12 (radius-md، يطابق .input-shell في CSS).
   static const BorderRadius input = md;
 
-  /// Default dialog border radius.
+  /// استدارة الحوار — 24 (radius-xl).
   static const BorderRadius dialog = xl;
 
-  // ── RoundedRectangleBorder shapes (for ShapeBorder APIs) ─────────────────
+  // ── أشكال جاهزة للـ ShapeBorder (بعض APIs تطلب Shape لا BorderRadius) ────
 
-  /// Small rounded rectangle shape (8 pt).
+  /// شكل مستطيل مستدير — استدارة صغيرة (8).
   static const RoundedRectangleBorder shapeSm = RoundedRectangleBorder(
     borderRadius: sm,
   );
 
-  /// Medium rounded rectangle shape (12 pt).
+  /// شكل مستطيل مستدير — استدارة متوسطة (12) — الأزرار والحقول.
   static const RoundedRectangleBorder shapeMd = RoundedRectangleBorder(
     borderRadius: md,
   );
 
-  /// Large rounded rectangle shape (16 pt).
+  /// شكل مستطيل مستدير — استدارة كبيرة (16) — البطاقات.
   static const RoundedRectangleBorder shapeLg = RoundedRectangleBorder(
     borderRadius: lg,
   );
 
-  /// Fully circular/stadium shape.
+  /// الشكل الكبسولي/الدوّال — الشارات والـ chips.
   static const StadiumBorder stadium = StadiumBorder();
 }

@@ -1,178 +1,175 @@
 import 'package:flutter/material.dart';
 
-/// Defines the full Material 3 typescale for the application.
+/// ═══════════════════════════════════════════════════════════════════════════
+/// مقياس الطباعة الكامل — مترجم من توكنات التصميم المرجعي (--type-*)
+/// ═══════════════════════════════════════════════════════════════════════════
 ///
-/// Prefer accessing styles through [BuildContext] extensions:
+/// الفكرة: تصميمنا يعرّف 10 مواصفات نصية (display، h1، h2، h3، body-lg،
+/// body، label-lg، label، body-sm، caption)، بينما يفرض Flutter 15 "دورًا"
+/// إلزاميًا. الحل: كل دور Material يأخذ مواصفة أقرب دور في تصميمنا —
+/// فتبقى كل واجهات Flutter القياسية (AppBar، ListTile، الأزرار...) متناسقة
+/// تلقائيًا مع هويتنا دون أي جهد إضافي في الشاشات.
+///
+/// ─── كيف تقرأ كل مواصفة؟ ───
+///   fontSize = حجم النص بالبكسل (من --type-*-size)
+///   fontWeight = الوزن (من --type-*-weight — يعمل لأن أوزان الخط الأربعة
+///                مسجلة في pubspec.yaml)
+///   height = كثافة السطر كنسبة (line-height ÷ font-size من التصميم)
+///   ⚠️ لا letterSpacing إطلاقًا — القيم الافتراضية مصممة للإنجليزية وتفسد
+///   اتصال الحروف العربية.
+///
+/// ─── القاعدة التشغيلية في الشاشات ───
+/// لا تكتب أبدًا TextStyle(fontSize: 20, ...) داخل ويدجت — اختر الدور:
 /// ```dart
-/// Text('Hello', style: context.textTheme.titleLarge);
+/// Text('ابدأ رحلتك الصحية', style: context.textTheme.displayLarge)
 /// ```
+/// (الوصول المختصر `context.textTheme` معرّف في context_extension.dart).
 TextTheme buildTextTheme() {
   const baseTextTheme = TextTheme(
-    // ── Display ──────────────────────────────────────────────────────────────
-    // Use for the largest, most impactful text on a screen.
-    // Typically reserved for hero/marketing sections, splash screens,
-    // or short one-word statements. Never use for body copy.
+    // ── عائلة Display — الأكبر والأبرز: عناوين البطولية فقط ────────────────
 
-    /// Display — 32/40, w700 (design token: --type-display).
-    /// Use for: hero headlines (e.g. home "ابدأ رحلتك الصحية").
+    /// Display — 32/40, w700 (--type-display).
+    /// الاستخدام: عنوان الرئيسية البطولي "ابدأ رحلتك الصحية"، المبالغ
+    /// الكبيرة جداً (amount.big 32/40).
     displayLarge: TextStyle(
       fontSize: 32,
       fontWeight: FontWeight.w700,
       height: 1.25,
-
     ),
 
-    /// 45 sp — Mid-size display text.
-    /// Use for: prominent feature headlines, onboarding first-screen titles.
+    /// مطابق لـ H1 — 28/36, w700.
+    /// التصميم لا يستخدم مستويين Display — مملوء بقيمة H1 حتى لا ينتج أي
+    /// استخدام غير مقصود نصًا خارج مقياسنا (قاعدة: كل دور له قيمة من
+    /// مقياسنا حتى لو لم يُستخدم).
     displayMedium: TextStyle(
       fontSize: 28,
       fontWeight: FontWeight.w700,
       height: 1.29,
-
     ),
 
-    /// 36 sp — Smallest display text.
-    /// Use for: section-level hero text, large marketing callouts.
+    /// مطابق لـ H2 — 24/32, w700.
     displaySmall: TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.w700,
       height: 1.33,
-
     ),
 
-    // ── Headline ─────────────────────────────────────────────────────────────
-    // Use for page/screen-level headings. Slightly smaller than Display —
-    // works well as the primary title of a full page or major section.
+    // ── عائلة Headline — عناوين الصفحات والأقسام الكبيرة ────────────────────
 
-    /// 32 sp — Large page-level heading.
-    /// Use for: main screen titles (e.g. "My Profile"), large dialog headers.
+    /// H1 — 28/36, w700 (--type-h1).
+    /// الاستخدام: عناوين المستوى الأول (نادرة في تطبيق موبايل مركّز).
     headlineLarge: TextStyle(
       fontSize: 28,
       fontWeight: FontWeight.w700,
       height: 1.29,
-
     ),
 
-    /// 28 sp — Standard page-level heading.
-    /// Use for: AppBar titles on content-heavy screens, sheet headers.
+    /// H2 — 24/32, w700 (--type-h2).
+    /// الاستخدام: اسم المنشأة، عنوان feature-panel، رقم الحجز الكبير،
+    /// المبلغ الرئيسي في amount-block.
     headlineMedium: TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.w700,
       height: 1.33,
-
     ),
 
-    /// 24 sp — Compact page-level heading.
-    /// Use for: section headings within a scrollable page, card group titles.
+    /// H3 — 20/28, w600 (--type-h3).
+    /// الاستخدام: عناوين أقسام الصفحة (section-heading .label)، عنوان
+    /// حالة الفراغ (empty-state .title)، اسم الطبيب في بطاقة الهوية.
     headlineSmall: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w600,
       height: 1.4,
-
     ),
 
-    // ── Title ─────────────────────────────────────────────────────────────────
-    // Use for component-level titles and prominent labels inside cards,
-    // lists, or dialogs. More emphasis than body, less than headline.
+    // ── عائلة Title — عناوين المكونات داخل البطاقات والقوائم ────────────────
 
-    /// 22 sp — Prominent component title.
-    /// Use for: AppBar titles (standard), large list-section headers,
-    ///          dialog/modal titles.
+    /// مطابق لـ H3 — 20/28, w600 (عنوان مكون بارز).
+    /// الاستخدام: عناوين الحواريات ورؤوس الـ sheets الكبيرة.
     titleLarge: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w600,
       height: 1.4,
-
     ),
 
-    /// 16 sp — Standard component title.
-    /// Use for: ListTile titles, card headings, tab labels, dropdown labels.
+    /// Label Large — 16/24, w600 (--type-label-lg).
+    /// الاستخدام: عناوين البطاقات القياسية، عنوان صف القائمة، عنوان حقل
+    /// النموذج، نص الـ tab.
     titleMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       height: 1.5,
-
     ),
 
-    /// 14 sp — Compact component title.
-    /// Use for: dense list item titles, chip labels, form field labels,
-    ///          subtitle of a section.
+    /// Label — 14/22, w600 (--type-label).
+    /// الاستخدام: العناوين المصغرة الكثيفة (قيم info-row)، تسميات مضغوطة.
     titleSmall: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       height: 1.57,
-
     ),
 
-    // ── Body ──────────────────────────────────────────────────────────────────
-    // Use for reading/content text. Optimised for legibility at comfortable
-    // reading sizes. Default for paragraphs and descriptions.
+    // ── عائلة Body — نصوص القراءة والمحتوى ──────────────────────────────────
 
-    /// 16 sp — Primary body text.
-    /// Use for: main paragraph text, message bubbles, article content,
-    ///          default Text() inside cards.
+    /// Body Large — 18/30, w400 (--type-body-lg).
+    /// الاستخدام: النص المميز الكبير (رقم الهاتف المعروض في شاشة OTP).
     bodyLarge: TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w400,
       height: 1.67,
-
     ),
 
-    /// 14 sp — Standard body text (most common).
-    /// Use for: secondary descriptions, ListTile subtitles, form helper text,
-    ///          dialog body copy. This is the workhorse style.
+    /// Body — 16/27, w400 (--type-body). النمط "الحصان العامل".
+    /// الاستخدام: نصوص الفقرات (bio، وصف home-hero)، النص المكتوب داخل
+    /// حقول الإدخال، نص الرسائل.
     bodyMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w400,
       height: 1.69,
-
     ),
 
-    /// 12 sp — Small body / caption text.
-    /// Use for: captions under images, timestamps, metadata, fine print,
-    ///          secondary info below a ListTile.
+    /// Body Small — 14/23, w400 (--type-body-sm).
+    /// الاستخدام: الأوصاف الثانوية (subtitle صف القائمة، نص status-copy،
+    /// نص الشرح تحت العناوين، helper text للحقول).
     bodySmall: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,
       height: 1.64,
-
     ),
 
-    // ── Label ─────────────────────────────────────────────────────────────────
-    // Use for UI control labels, buttons, and navigation items.
-    // NOT for body copy — these are designed to label interactive elements.
+    // ── عائلة Label — تسميات عناصر التحكم (ليست لنصوص القراءة) ──────────────
 
-    /// 14 sp — Button and prominent control label.
-    /// Use for: ElevatedButton / TextButton / OutlinedButton text,
-    ///          navigation bar labels (selected), tab bar labels.
+    /// Label Large — 16/24, w600 (--type-label-lg).
+    /// ⚠️ الوزن 600 وليس 500 افتراضي Material — لأن هذا الدور هو الذي
+    /// تقرؤه الأزرار تلقائياً، والتصميم يحدد نص الأزرار بـ 600.
+    /// الاستخدام: نص كل الأزرار (button font: label-lg)، عناوين صفوف
+    /// القوائم البارزة.
     labelLarge: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600,
       height: 1.5,
-
     ),
 
-    /// 12 sp — Standard control label.
-    /// Use for: chip text, badge text, tooltip text, navigation rail labels,
-    ///          input counter text, overline headings.
+    /// Label — 14/22, w600 (--type-label).
+    /// الاستخدام: نص الـ chips والـ badges، نص eyebrow ("الرعاية أقرب مما
+    /// تتوقع")، عدّاد الأحرف في الحقول.
     labelMedium: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w600,
       height: 1.57,
-
     ),
 
-    /// 11 sp — Smallest control label.
-    /// Use for: dense navigation labels, very small badges, annotation text,
-    ///          data table column headers. Avoid for reading-heavy content.
+    /// Caption — 12/20, w500 (--type-caption).
+    /// الاستخدام: الطوابع الزمنية للإشعارات، النصوص الدقيقة (meta)،
+    /// تسميات شريط التنقل السفلي (12px في CSS).
     labelSmall: TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w500,
       height: 1.67,
-
     ),
   );
 
-  // Apply the primary custom font family to every text style in the scale.
+  // ربط عائلة الخط الأساسية بكل الأدوار دفعة واحدة — الأوزان تُلتقط
+  // تلقائيًا من ملفات الخط المسجلة في pubspec.yaml.
   return baseTextTheme.apply(fontFamily: 'IBMPlexSansArabic');
 }

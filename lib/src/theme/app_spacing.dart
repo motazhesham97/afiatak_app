@@ -1,13 +1,27 @@
 
-/// Named spacing constants aligned with an 8-pt grid.
+/// ═══════════════════════════════════════════════════════════════════════════
+/// ثوابت المسافات — مبنية على شبكة 8pt (شبكة التصميم المعيارية)
+/// ═══════════════════════════════════════════════════════════════════════════
 ///
-/// Usage:
+/// لماذا لا نكتب أرقامًا مباشرة؟ لأن "SizedBox(height: 14)" اليوم يصبح 15
+/// غدًا في ملف آخر و13 في ثالث — فتتفكك وحدة بصرية التطبيق دون أن يشعر أحد.
+/// مع الـ tokens: كل مسافة في التطبيق من قائمة واحدة، وتغيير قيمة واحدة
+/// ينتشر تلقائيًا في كل مكان صحيح.
+///
+/// الاستخدام:
 /// ```dart
-/// SizedBox(height: AppSpacing.md)        // 16 pt gap
-/// Padding(padding: EdgeInsets.all(AppSpacing.lg))
+/// SizedBox(height: AppSpacing.md)                    // فجوة 16
+/// Padding(padding: EdgeInsets.all(AppSpacing.lg))    // حواشي 24
 /// ```
+///
+/// قاعدة الترجمة من تصميم HTML: قيمة CSS غير موجودة هنا (مثل 10px)
+/// تُقرَّب لأقرب token — لا يُضاف token جديد إلا إذا تكررت القيمة
+/// في أماكن كثيرة بالتصميم (قرار واعٍ يُناقش، لا تراكم صامت).
 abstract final class AppSpacing {
   AppSpacing._();
+
+  // القيم مخزنة خاصة (_) والوصول عبر getters ليبقى النمط موحدًا
+  // ولتسهيل أي مستقبل نحتاج فيه جعل المسافات قابلة للتكيف.
 
   static const double _xxs = 2;
   static const double _xs = 4;
@@ -20,53 +34,71 @@ abstract final class AppSpacing {
   static const double _xxl = 48;
   static const double _xxxl = 64;
 
-  /// 2 pt — hairline gap, icon-to-label spacing.
+  /// 2 — فجوة شعرية: بين أيقونة ونصها في السطر الواحد.
   static double get xxs => _xxs;
 
-  /// 4 pt — tightest spacing, between tightly coupled elements.
+  /// 4 — أضيق فجوة: بين عناصر مترابطة بإحكام (سطر داخل بطاقة).
   static double get xs => _xs;
 
-  /// 8 pt — small spacing, inside compact components (chip padding, icon gap).
+  /// 8 — فجوة صغيرة: داخل المكونات المضغوطة (حواشي chip، فجوة أيقونة زر).
+  /// يقابل --space-2 في التصميم، وهو أيضًا `itemGap`.
   static double get sm => _sm;
 
-  /// 12 pt — medium-small, inner card padding on dense layouts.
+  /// 12 — متوسط-صغير: حواشي داخلية للبطاقات الكثيفة، فجوة حقول النماذج.
+  /// يقابل --space-3، وهو `formFieldGap`.
   static double get ms => _ms;
 
-  /// 16 pt — base unit, standard component padding and list item gaps.
+  /// 16 — الوحدة الأساس: حواشي المكونات القياسية وفواصل عناصر القوائم،
+  /// وهو أيضًا هامش الصفحة (`--page-margin: 16px` في التصميم).
   static double get md => _md;
 
-  /// 20 pt — medium-large, comfortable section spacing.
+  /// 20 — متوسط-كبير: تنفّس مريح بين عناصر قسم واحد.
+  /// يقابل --space-5.
   static double get ml => _ml;
 
-  /// 24 pt — large, between content sections on a page.
+  /// 24 — كبير: بين أقسام المحتوى في الصفحة.
+  /// يقابل --space-6.
   static double get lg => _lg;
 
-  /// 32 pt — extra large, major section breaks or hero padding.
+  /// 32 — كبير جدًا: فصل أقسام رئيسية، حواشي العناصر البطولية.
+  /// يقابل --space-8.
   static double get xl => _xl;
 
-  /// 48 pt — 2× large, top-of-page safe area offsets, empty state padding.
+  /// 48 — ضعف الكبير: إزاحات أعلى الصفحة، حواشي حالات الفراغ.
+  /// يقابل --space-12.
   static double get xxl => _xxl;
 
-  /// 64 pt — maximum, full-bleed header heights.
+  /// 64 — الأقصى: ارتفاعات الرؤوس الممتدة، فصل جذري بين شاشتي محتوى.
+  /// يقابل --space-16.
   static double get xxxl => _xxxl;
 
-  // ── Semantic aliases ──────────────────────────────────────────────────────
+  // ── الأسماء الدلالية (aliases) — استخدمها بدل الأرقام الخام حين يوجد ──
+  // ── معنى دلالي، لأنها توثق "لماذا هذه المسافة" لا "كم تساوي" ──────────
 
-  /// Standard horizontal page margin.
+  /// هامش الصفحة الأفقي القياسي — 16 (يقابل --page-margin).
   static double get pagePadding => md;
 
-  /// Gap between list/grid items.
+  /// الفجوة بين عناصر قائمة أو شبكة — 8.
   static double get itemGap => sm;
 
-  /// Inner padding for cards.
+  /// الحواشي الداخلية للبطاقات — 16 (يقابل .surface.pad).
   static double get cardPadding => md;
 
-  /// Vertical gap between form fields.
+  /// الفجوة الرأسية بين حقول النموذج — 12 (يقابل .input-group gap).
   static double get formFieldGap => ms;
 }
 
-/// Extension to provide identity scaling when ScreenUtil is disabled.
-/// This allows using .h, .w, .sp, .r on numbers without conditional checks.
+/// ═══════════════════════════════════════════════════════════════════════════
+/// امتداد "الهوية" للأرقام — جسر توافق فقط، لا أداة تكبير حقيقية
+/// ═══════════════════════════════════════════════════════════════════════════
+///
+/// المشروع لا يستخدم ScreenUtil (قرار معماري — حجوم Flutter الطبيعية تكفي
+/// لتطبيق موبايل RTL). هذا الامتداد يجعل `16.h` و `16.w` تعمل **لا تكتب
+/// خطأً** إن نسخت كودًا من مشروع قديم استخدم ScreenUtil — لكنها لا تكبّر
+/// ولا تصغّر شيئًا: تعيد الرقم كما هو (double).
+///
+/// ⚠️ لا تعتمد عليها في كود جديد: استخدم القيم مباشرة
+/// (AppSpacing.md بدل md.h). وجودها حماية من الأخطاء لا دعوة للاستخدام.
 extension ResponsiveNumberExtension on num {
   double get h => toDouble();
   double get w => toDouble();

@@ -1,43 +1,47 @@
-/// Named animation duration constants following Material 3 motion guidelines.
+/// ═══════════════════════════════════════════════════════════════════════════
+/// مدد الحركة — أربع مدد فقط من التصميم المرجعي + مدة الـ shimmer
+/// ═══════════════════════════════════════════════════════════════════════════
 ///
-/// Usage:
+/// التصميم يعرّف: instant 80 / fast 140 / standard 220 / deliberate 320.
+/// ⚠️ قلّصنا 9 مدد ورثناها من FlutterInit إلى 5 — الانضباط مقصود: خيارات
+/// أقل = قرارات أسرع = حركة متسقة في كل التطبيق.
+///
+/// الاستخدام:
 /// ```dart
 /// AnimatedContainer(duration: AppDurations.normal, curve: AppCurves.standard)
 /// ```
 abstract final class AppDurations {
   AppDurations._();
 
-  /// 50 ms — nearly instant, icon state swaps.
+  /// 80ms — لحظي: تبديل حالة أيقونة، استجابة ضغطة فورية.
+  /// يقابل --duration-instant في التصميم.
   static const Duration instant = Duration(milliseconds: 80);
 
-
-  /// 150 ms — fast transition for small, contained elements (checkboxes, chips).
+  /// 140ms — سريع: العناصر الصغيرة المحتواة (checkbox، chip، شارة).
+  /// يقابل --duration-fast.
   static const Duration fast = Duration(milliseconds: 140);
 
-
-
-  /// 300 ms — standard transition for most UI animations.
-  /// Follows Material 3 "standard" motion duration guideline.
+  /// 220ms — القياسي: معظم انتقالات الواجهة (توسّع بطاقة، ظهور قسم).
+  /// يقابل --duration-standard (الاسم "normal" اصطلاح Flutter الشائع).
   static const Duration normal = Duration(milliseconds: 220);
 
-
-
-  /// 500 ms — slow, deliberate reveal of large surfaces (drawers, dialogs).
+  /// 320ms — متأنٍّ: الأسطح الكبيرة (ظهور dialog، انزلاق sheet،
+  /// انتقال صفحة كاملة).
+  /// يقابل --duration-deliberate.
   static const Duration slow = Duration(milliseconds: 320);
 
-
-
-  /// 1000 ms — skeleton/shimmer cycle base duration.
+  /// 1350ms — دورة لمعان الـ Skeleton الوهمي (skeletonizer).
+  /// مأخوذة من CSS المرجعي: `animation: shimmer 1.35s infinite`.
   static const Duration shimmer = Duration(milliseconds: 1350);
 
-  // ── Semantic aliases ──────────────────────────────────────────────────────
+  // ── الأسماء الدلالية — لماذا هذه المدة لا كم تساوي ────────────────────────
 
-  /// Recommended duration for page transitions.
+  /// الانتقال الموصى به بين الصفحات — متأمل قليلًا ليتنفس الـ push.
   static const Duration pageTransition = slow;
 
-  /// Recommended duration for in-place widget transitions (show/hide).
+  /// الانتقالات داخل المكان (إظهار/إخفاء ويدجت) — القياسي.
   static const Duration widgetTransition = normal;
 
-  /// Recommended duration for micro-interactions (button press, hover).
+  /// التفاعلات الدقيقة (ضغط زر، hover) — السريع.
   static const Duration microInteraction = fast;
 }
